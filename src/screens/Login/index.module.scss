@@ -1,0 +1,34 @@
+.container {
+  background-color: #EAFBFF;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; 
+}
+
+.containerIlustration {
+  align-self: center;
+}
+
+.containerForm {
+  background-color: #fff;
+  min-height: 80vh;
+  padding: 20px 40px;
+  min-width: 500px;
+  min-height: 100%;
+}
+
+.signUp {
+  font-weight: 600;
+  text-align: right;
+  color: #5d5e5f;
+
+  & > * {
+    font-weight: 700;
+    margin-left: 8px;
+    text-decoration: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
