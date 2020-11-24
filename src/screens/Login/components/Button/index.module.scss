@@ -6,6 +6,7 @@
   font-weight: 700; 
   font-size: 15px;
   transition: background-color .5s ease;
+  background-color: transparent;
   
   &:hover {
     cursor: pointer;
@@ -31,4 +32,15 @@
   &:hover {
     background-color: #EAEAEA;
   }
+}
+
+.anchor {
+  @extend .button;
+  text-align: left;
+  color: #346EDF;
+  min-height: 30px;
+  text-decoration: underline;
+  padding: 0; 
+  margin: 0;
+  font-weight: 400;
 }
