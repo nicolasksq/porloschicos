@@ -24,8 +24,12 @@ function RestorePassword() {
             iconActive={userIconActive}
           />
         </div>
+        <br />
         <div className={styles.containerButton}>
-          <Button className={styles.button}>Iniciar Sesión</Button>
+          <div className={styles.button}>
+            <Button>Restablecer</Button>
+          </div>
+          <br />
           <Button variantStyle="anchor">
             Regresar a inicio de sesion
           </Button>
