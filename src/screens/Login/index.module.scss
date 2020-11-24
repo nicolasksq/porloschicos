@@ -24,11 +24,16 @@
 .containerForm {
   background-color: #fff;
   min-height: 80vh;
-  //padding: 20px 40px;
-   // min-width: 450px;
   padding: 20px;
   min-width: 300px;
   min-height: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .containerForm {
+    padding: 20px 40px;
+    min-width: 450px;
+  }
 }
 
 .signUp {
@@ -49,17 +54,29 @@
 
 
 .containerInput {
-  padding: 20px 50px 20px 0;
+  padding: 20px 10px 20px 0;
+}
+
+@media screen and (min-width: 768px) {
+  .containerInput {
+    padding: 20px 50px 20px 0;
+  }
 }
 
 .containerButtonCheckbox {
   display: flex;
-  //align-items: center;
-  //padding: 20px 25px 20px 0; 
   flex-direction: column;
 
   & > button {
     flex: 1;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .containerButtonCheckbox {
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 25px 20px 0; 
   }
 }
 
@@ -84,15 +101,29 @@
   }
 }
 
+@media screen and (min-width: 768px) {
+  .containerCheckbox {
+    align-self: center;
+    margin-bottom: 0;
+  }
+}
+
 .containerButtons {
-  margin: 20px 20px 20px 0;
+  margin: 20px 0;
   padding-top: 25px;
   border-top: 1px solid #ccc;
   display: flex;
   flex-direction: column;
+ 
   & > * + * {
     margin-top: 15px;
   } 
+}
+
+@media screen and (min-width: 768px) {
+  .containerButtons {
+    margin: 20px 20px 20px 0;
+  }
 }
 
 .iconBtn {
