@@ -26,9 +26,7 @@ function RestorePassword() {
         </div>
         <br />
         <div className={styles.containerButton}>
-          <div className={styles.button}>
-            <Button>Restablecer</Button>
-          </div>
+          <Button>Restablecer contraseña</Button>
           <br />
           <Button variantStyle="anchor">
             Regresar a inicio de sesion
