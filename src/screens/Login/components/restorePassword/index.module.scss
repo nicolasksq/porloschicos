@@ -1,0 +1,23 @@
+.container {
+  margin-top: 20%;
+}
+.containerInput {
+  padding: 20px 10px 20px 0;
+}
+.containerButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+}
+
+.button {
+  max-width: 150px;
+}
+
+@media screen and (min-width: 768px) {
+  .containerInput {
+    padding: 20px 50px 20px 0;
+  }
+}  
+

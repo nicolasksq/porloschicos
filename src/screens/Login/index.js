@@ -1,7 +1,8 @@
 import React from 'react';
 
 import ilustration from './assets/ilustration.svg';
-import FormLogin from './components/FormLogin';
+// import FormLogin from './components/FormLogin';
+import RestorePassword from './components/restorePassword';
 import styles from './index.module.scss';
 
 function Login() {
@@ -12,7 +13,7 @@ function Login() {
         <img className={styles.ilustration} src={ilustration} alt="Ilustracion" />
       </div>
       <div className={styles.containerForm}>
-        <FormLogin />
+        <RestorePassword />
       </div>
     </div>
   );

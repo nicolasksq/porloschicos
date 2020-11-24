@@ -20,7 +20,7 @@ function FormLogin() {
         ¿No tenés cuenta?
         <span>Registrate</span>
       </p>
-      <Title upperTitle="¡Bienvenidos!">
+      <Title upperTitle="¡Bienvenido!">
         Iniciar Sesión
       </Title>
       <form className="form" action="">
