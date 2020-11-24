@@ -20,10 +20,13 @@ function Input({
           {' '}
         </p>
         ) }
-        <div className={styles.containerIcon}>
-          <img className={styles.icon} src={icon} alt=" " />
-          <img className={styles.iconActive} src={iconActive || icon} alt=" " />
-        </div>
+        { icon
+          && (
+          <div className={styles.containerIcon}>
+            <img className={styles.icon} src={icon} alt=" " />
+            <img className={styles.iconActive} src={iconActive || icon} alt=" " />
+          </div>
+          )}
       </div>
     </>
   );
@@ -32,7 +35,7 @@ function Input({
 Input.propTypes = {
   label: PropTypes.string.isRequired,
   htmlFor: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.string,
   type: PropTypes.string,
   error: PropTypes.string,
   iconActive: PropTypes.string,
@@ -42,6 +45,7 @@ Input.defaultProps = {
   type: 'text',
   error: null,
   iconActive: null,
+  icon: null,
 };
 
 export default Input;

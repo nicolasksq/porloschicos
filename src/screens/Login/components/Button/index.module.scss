@@ -1,0 +1,34 @@
+.button {
+  display: block;
+  min-height: 42px;
+  border: none;
+  border-radius: 20px;
+  font-weight: 700; 
+  font-size: 15px;
+  transition: background-color .5s ease;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.primary {
+  @extend .button;
+  color: #fff;
+  background-color: #346EDF;
+
+  &:hover {
+    background-color: #183e88;
+  }
+}
+
+.light {
+  @extend .button;
+  color:#346EDF;
+  border: 1px solid #346EDF;
+  background-color: #fff;
+
+  &:hover {
+    background-color: #EAEAEA;
+  }
+}

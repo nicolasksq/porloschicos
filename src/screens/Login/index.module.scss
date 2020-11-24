@@ -6,14 +6,28 @@
 }
 
 .containerIlustration {
-  align-self: center;
+  display: none;
+}
+
+@media screen and (min-width: 480px) {
+  .containerIlustration {
+    padding: 0 10px;
+    display: block;
+    width: 40%; 
+  }
+}
+
+.ilustration {
+  margin-top: 48px;
 }
 
 .containerForm {
   background-color: #fff;
   min-height: 80vh;
-  padding: 20px 40px;
-  min-width: 450px;
+  //padding: 20px 40px;
+   // min-width: 450px;
+  padding: 20px;
+  min-width: 300px;
   min-height: 100%;
 }
 
@@ -33,74 +47,59 @@
   }
 }
 
-.containerTitle { 
-  padding: 30px 0;
-  color: #444;
-}
-
-.welcomeText {
-  padding: 0;
-  margin: 0 0 8px 0;
-  font-weight: 200;
-  font-size: 15px;
-}
-
-.title {
-  margin: 0; 
-  padding: 0;
-  font-weight: 600;
-  font-size: 28px;
-  color: #5D5E5F; 
-}
 
 .containerInput {
   padding: 20px 50px 20px 0;
 }
 
-.buttonAnchor {
-  color: #346EDF;
-  font-size: 15px;
-  border: none;
-  background-color: transparent;
-  text-decoration: underline;
-  padding: 0; 
-  margin-top: 8px;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
 .containerButtonCheckbox {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0; 
+  //align-items: center;
+  //padding: 20px 25px 20px 0; 
+  flex-direction: column;
+
+  & > button {
+    flex: 1;
+  }
 }
 
 .containerCheckbox {
-  & > * {
-    vertical-align: middle;
-  }
-  
-  & > input {
+  align-self: flex-start;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+ 
+  margin-right: 20px;
+  & input {
     width: 18px;
     height: 18px;
-    margin-right: 7px;
   }
 
   & > label {
-    font-size: 14px;
+    margin-left: 7px;
+    font-size: 13.5px;
+    color: #313030;
+    align-self: center;
+    transform: translateY(2.5px);
   }
 }
 
-.button {
-  padding: 12px 35px;
-  text-align: center;
-  color: #fff;
-  border: none;
-  border-radius: 20px;
-  background-color: #346EDF;
-  font-weight: 600;
-  font-size: 15.5px;
+.containerButtons {
+  margin: 20px 20px 20px 0;
+  padding-top: 25px;
+  border-top: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  & > * + * {
+    margin-top: 15px;
+  } 
 }
+
+.iconBtn {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  min-height: 100%;
+}
+
