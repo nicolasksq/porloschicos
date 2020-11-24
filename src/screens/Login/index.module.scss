@@ -13,7 +13,7 @@
   background-color: #fff;
   min-height: 80vh;
   padding: 20px 40px;
-  min-width: 500px;
+  min-width: 450px;
   min-height: 100%;
 }
 
@@ -31,4 +31,76 @@
       cursor: pointer;
     }
   }
+}
+
+.containerTitle { 
+  padding: 30px 0;
+  color: #444;
+}
+
+.welcomeText {
+  padding: 0;
+  margin: 0 0 8px 0;
+  font-weight: 200;
+  font-size: 15px;
+}
+
+.title {
+  margin: 0; 
+  padding: 0;
+  font-weight: 600;
+  font-size: 28px;
+  color: #5D5E5F; 
+}
+
+.containerInput {
+  padding: 20px 50px 20px 0;
+}
+
+.buttonAnchor {
+  color: #346EDF;
+  font-size: 15px;
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
+  padding: 0; 
+  margin-top: 8px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.containerButtonCheckbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0; 
+}
+
+.containerCheckbox {
+  & > * {
+    vertical-align: middle;
+  }
+  
+  & > input {
+    width: 18px;
+    height: 18px;
+    margin-right: 7px;
+  }
+
+  & > label {
+    font-size: 14px;
+  }
+}
+
+.button {
+  padding: 12px 35px;
+  text-align: center;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  background-color: #346EDF;
+  font-weight: 600;
+  font-size: 15.5px;
 }
