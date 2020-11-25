@@ -13,13 +13,14 @@ function RestorePassword() {
   return (
     <div className={styles.container}>
       <Title upperTitle="¡Bienvenido!">
-        Restablecer Contraseña
+        ¿Olvidaste tu Contraseña?
       </Title>
+      <p>Ingresá tu e-mail y te enviaremos instrucciones para restablecer la contraseña</p>
       <form className="form" action="">
         <div className={styles.containerInput}>
           <Input
-            htmlFor="username"
-            label="usuario"
+            htmlFor="e-mail"
+            label="E-mail"
             icon={userIcon}
             iconActive={userIconActive}
           />
