@@ -9,9 +9,13 @@
   display: none;
 }
 
+.logo {
+  padding: 10px;
+}
+
 @media screen and (min-width: 480px) {
   .containerIlustration {
-    padding: 0 10px;
+    padding: 25px 10px;
     display: block;
     width: 40%; 
   }

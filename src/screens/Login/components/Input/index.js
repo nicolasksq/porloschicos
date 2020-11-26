@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './index.module.scss';
 
 function Input({
-  label, htmlFor, type, error, iconActive, icon,
+  label, htmlFor, type, error, iconActive, icon, onClick, onChange,
 }) {
   return (
     <>
@@ -12,7 +12,13 @@ function Input({
         {label}
       </label>
       <div className={styles.containerInput}>
-        <input className={styles.input} type={type} id={htmlFor} />
+        <input
+          className={styles.input}
+          type={type}
+          id={htmlFor}
+          onClick={onClick}
+          onChange={onChange}
+        />
         { error && (
         <p className={styles.error}>
           {' '}
@@ -39,6 +45,8 @@ Input.propTypes = {
   type: PropTypes.string,
   error: PropTypes.string,
   iconActive: PropTypes.string,
+  onClick: PropTypes.func,
+  onChange: PropTypes.func,
 };
 
 Input.defaultProps = {
@@ -46,6 +54,8 @@ Input.defaultProps = {
   error: null,
   iconActive: null,
   icon: null,
+  onClick: null,
+  onChange: null,
 };
 
 export default Input;

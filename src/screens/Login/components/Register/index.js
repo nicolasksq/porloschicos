@@ -1,22 +1,27 @@
 import React from 'react';
 
+import getGreeting from 'helpers';
+
 import userIcon from '../../assets/user-grey.svg';
 import userIconActive from '../../assets/user-blue.svg';
 import passIcon from '../../assets/password-grey.svg';
-import fbIcon from '../../assets/fcb.svg';
-import googleIcon from '../../assets/google.svg';
 import passIconActive from '../../assets/password-blue.svg';
+import emailIcon from '../../assets/mail.svg';
+import emailIconActive from '../../assets/mail-blue.svg';
+import dniIcon from '../../assets/id-card.svg';
+import dniIconActive from '../../assets/id-card-blue.svg';
 
 import Input from '../Input';
 import Title from '../Title';
 import Button from '../Button';
+import AuthFbGoogle from '../AuthFbGoogle';
 
 import styles from './index.module.scss';
 
 function Register() {
   return (
     <>
-      <Title upperTitle="¡Bienvenido!">
+      <Title upperTitle={getGreeting()}>
         Registrate
       </Title>
       <form className="form" action="">
@@ -41,34 +46,23 @@ function Register() {
           <Input
             htmlFor="e-mail"
             label="E-mail"
-            icon={passIcon}
-            iconActive={passIconActive}
+            icon={emailIcon}
+            iconActive={emailIconActive}
           />
         </div>
         <div className={styles.containerInput}>
           <Input
             htmlFor="dni"
             label="Documento"
-            icon={passIcon}
-            iconActive={passIconActive}
+            icon={dniIcon}
+            iconActive={dniIconActive}
           />
         </div>
         <div className={styles.containerButtonCheckbox}>
           <Button>Iniciar Sesión</Button>
         </div>
       </form>
-      <div className={styles.containerButtons}>
-        <Button variantStyle="light">
-          <img className={styles.iconBtn} src={fbIcon} alt="" />
-          {' '}
-          Registrate con Facebook
-        </Button>
-        <Button variantStyle="light">
-          <img className={styles.iconBtn} src={googleIcon} alt="" />
-          {' '}
-          Registrate con Google
-        </Button>
-      </div>
+      <AuthFbGoogle />
     </>
   );
 }

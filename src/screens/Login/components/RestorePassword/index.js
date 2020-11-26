@@ -1,4 +1,5 @@
 import React from 'react';
+import getGreeting from 'helpers';
 
 import userIcon from '../../assets/user-grey.svg';
 import userIconActive from '../../assets/user-blue.svg';
@@ -12,10 +13,12 @@ import styles from './index.module.scss';
 function RestorePassword() {
   return (
     <div className={styles.container}>
-      <Title upperTitle="¡Bienvenido!">
+      <Title upperTitle={getGreeting()}>
         ¿Olvidaste tu Contraseña?
       </Title>
-      <p>Ingresá tu e-mail y te enviaremos instrucciones para restablecer la contraseña</p>
+      <p className={styles.subtitle}>
+        Ingresá tu e-mail y te enviaremos instrucciones para restablecer la contraseña
+      </p>
       <form className="form" action="">
         <div className={styles.containerInput}>
           <Input
