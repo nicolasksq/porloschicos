@@ -1,0 +1,28 @@
+.subtitle {
+  color: #5d5e5f;
+  font-size: 14.5px;
+  padding: 5px 0;
+  margin: 0;
+}
+
+.containerInput {
+  padding: 20px 10px 20px 0;
+}
+
+.containerButton {
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+  margin-right: 50px;
+  
+  & button:first-of-type {
+    margin-bottom: 50px;
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .containerInput {
+    padding: 20px 30px 20px 0;
+  }
+}

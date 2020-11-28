@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import styles from './index.module.scss';
 
-function Title({ children, upperTitle, tag }) {
+function Title({ children, upperTitle, Tag }) {
   return (
     <div className={styles.containerTitle}>
       { upperTitle && <p className={styles.welcomeText}>{upperTitle}</p> }
-      <tag className={styles.title}>{children}</tag>
+      <Tag className={styles.title}>{children}</Tag>
     </div>
   );
 }
@@ -15,11 +15,11 @@ function Title({ children, upperTitle, tag }) {
 Title.propTypes = {
   children: PropTypes.node.isRequired,
   upperTitle: PropTypes.string,
-  tag: PropTypes.string,
+  Tag: PropTypes.string,
 };
 
 Title.defaultProps = {
   upperTitle: null,
-  tag: 'h1',
+  Tag: 'h1',
 };
 export default Title;

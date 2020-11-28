@@ -5,7 +5,7 @@ export default function getGreeting() {
     return '¡Buenos Días!';
   }
 
-  if (HOURS >= 13 && HOURS <= 20) {
+  if (HOURS >= 13 && HOURS <= 19) {
     return '¡Buenas Tardes!';
   }
 
