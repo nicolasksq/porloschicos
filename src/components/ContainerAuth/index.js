@@ -21,13 +21,22 @@ function ContainerAuth({
       </div>
       <div className={styles.containerForm}>
         <img className={styles.logoForm} src={logo} alt="Por los chicos" />
+
         { topText && (
           <p className={styles.topText}>
             { topText }
             <Link className={styles.link} to={linkTo}>{ topLink }</Link>
           </p>
         )}
+
         { children }
+
+        { topText && (
+          <p className={styles.topTextMobile}>
+            { topText }
+            <Link className={styles.link} to={linkTo}>{ topLink }</Link>
+          </p>
+        )}
       </div>
     </div>
   );
