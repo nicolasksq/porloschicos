@@ -14,3 +14,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+  color: #346EDF;
+  font-size: 15px;
+}

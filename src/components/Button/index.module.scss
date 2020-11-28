@@ -7,9 +7,24 @@
   font-size: 15px;
   transition: background-color .5s ease;
   background-color: transparent;
-  
+  padding: 0;
+  overflow: hidden;
+
   &:hover {
     cursor: pointer;
+  }  
+
+  & a {
+    color: #fff; 
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 42px;
+    
+    & > span {
+      pointer-events: none;
+    }
   }
 }
 

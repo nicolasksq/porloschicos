@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import Title from '../../../Title';
-import Button from '../../../Button';
+import Title from 'components/Title';
+import Button from 'components/Button';
 
 import styles from './index.module.scss';
 
@@ -17,11 +18,15 @@ function SentEmailMessage({ email }) {
           Vas a recibir un enlace en unos instantes. Abrilo y restablecé tu contraseña.
         </p>
         <p className={styles.email}>{ email }</p>
-        <Button>Volver a iniciar sesión</Button>
+        <Button>
+          <Link to="/login">
+            <span>Volver a iniciar sesión</span>
+          </Link>
+        </Button>
       </div>
-      <Button variantStyle="anchor">
+      <Link to="/login">
         Regresar a iniciar sesión
-      </Button>
+      </Link>
     </>
   );
 }

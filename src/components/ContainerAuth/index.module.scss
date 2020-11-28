@@ -1,0 +1,56 @@
+.container {
+  background-color: #EAFBFF;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; 
+}
+
+.containerForm {
+  background-color: #fff;
+  min-height: 80vh;
+  padding: 20px;
+  min-width: 300px;
+  min-height: 100%;
+}
+
+.containerIlustration {
+  display: none;
+}
+
+.logo {
+  padding: 10px;
+}
+
+.ilustration {
+  margin-top: 48px;
+}
+
+.topText {
+  font-weight: 600;
+  text-align: right;
+  color: #5d5e5f;
+}
+
+.link {
+  font-weight: 700;
+  color: #5d5e5f;
+  margin-left: 8px;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 768px) {
+  .containerIlustration {
+    padding: 25px 10px;
+    display: block;
+    width: 40%; 
+  }
+  
+  .containerForm {
+    padding: 20px 40px;
+    min-width: 450px;
+  }
+  
+  .logoForm {
+    display: none;
+  }
+}

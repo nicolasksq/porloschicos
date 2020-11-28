@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import emailIcon from '../../../../assets/mail.svg';
-import emailIconActive from '../../../../assets/mail-blue.svg';
+import emailIcon from 'assets/mail.svg';
+import emailIconActive from 'assets/mail-blue.svg';
 
-import Input from '../../../Input';
-import Button from '../../../Button';
+import Input from 'components/Input';
+import Button from 'components/Button';
 
 import styles from './index.module.scss';
 
@@ -25,9 +26,9 @@ function FormRestorePassword() {
         </div>
         <div className={styles.containerButton}>
           <Button>Restablecer contraseña</Button>
-          <Button variantStyle="anchor">
+          <Link to="/login">
             Regresar a iniciar sesión
-          </Button>
+          </Link>
         </div>
       </form>
     </>
