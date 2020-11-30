@@ -1,12 +1,12 @@
 import React from 'react';
 import getGreeting from 'helpers';
 
-import passwordIcon from '../../assets/password-grey.svg';
-import passwordIconActive from '../../assets/password-blue.svg';
+import passwordIcon from '../../../assets/password-grey.svg';
+import passwordIconActive from '../../../assets/password-blue.svg';
 
-import Input from '../Input';
-import Button from '../Button';
-import Title from '../Title';
+import Input from '../../../components/Input';
+import Button from '../../../components/Button';
+import Title from '../../../components/Title';
 
 import styles from './index.module.scss';
 
@@ -17,7 +17,7 @@ function UpdatePassword() {
         Actualizar Contraseña
       </Title>
       <p className={styles.subtitle}>
-        Escribe tu nueva contraseña
+        Escribí tu nueva contraseña
       </p>
       <form className="form" action="">
         <div className={styles.containerInput}>

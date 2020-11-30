@@ -33,7 +33,7 @@ function Register() {
         <div className={styles.containerInput}>
           <Input
             htmlFor="username"
-            label="usuario"
+            label="Usuario"
             icon={userIcon}
             iconActive={userIconActive}
           />

@@ -1,5 +1,5 @@
 .container {
-  background-color: #EAFBFF;
+  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   justify-content: center; 
@@ -12,7 +12,11 @@
   min-width: 300px;
   min-height: 100%;
 }
-
+@media screen and (min-width: 480px) {
+  .containerForm{
+    min-width: 390px;
+  }
+}
 .containerIlustration {
   display: none;
 }
@@ -44,6 +48,9 @@
 }
 
 @media screen and (min-width: 768px) {
+  .container {
+    background-color: #eafbff;
+  }
   .topText {
     display: block;
   }
@@ -69,6 +76,10 @@
   }
   
   .logoForm {
+    display: none;
+  }
+  
+  .topTextMobile{
     display: none;
   }
 }
