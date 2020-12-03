@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import getGreeting from 'helpers';
 
 import passwordIcon from '../../../assets/password-grey.svg';
@@ -11,6 +11,15 @@ import Title from '../../../components/Title';
 import styles from './index.module.scss';
 
 function UpdatePassword() {
+  const [form, setState] = useState({
+    password: '',
+  });
+  const update = (e) => {
+    setState({
+      ...form,
+      [e.target.id]: e.target.value,
+    });
+  };
   return (
     <div className={styles.container}>
       <Title upperTitle={getGreeting()}>
@@ -27,6 +36,9 @@ function UpdatePassword() {
             type="password"
             icon={passwordIcon}
             iconActive={passwordIconActive}
+            id="password"
+            value="password"
+            onChange={update}
           />
         </div>
         <div className={styles.containerButton}>

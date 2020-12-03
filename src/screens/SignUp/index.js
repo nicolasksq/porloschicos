@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import getGreeting from 'helpers';
 
@@ -20,6 +20,18 @@ import dniIconActive from 'assets/id-card-blue.svg';
 import styles from './index.module.scss';
 
 function Register() {
+  const [form, setState] = useState({
+    username: '',
+    password: '',
+    email: '',
+    dni: '',
+  });
+  const update = (e) => {
+    setState({
+      ...form,
+      [e.target.id]: e.target.value,
+    });
+  };
   return (
     <ContainerAuth
       topText="¿Ya tenés una cuenta?"
@@ -36,6 +48,9 @@ function Register() {
             label="Usuario"
             icon={userIcon}
             iconActive={userIconActive}
+            id="username"
+            value={form.username}
+            onChange={update}
           />
         </div>
         <div className={styles.containerInput}>
@@ -45,6 +60,9 @@ function Register() {
             type="password"
             icon={passIcon}
             iconActive={passIconActive}
+            id="password"
+            value={form.password}
+            onChange={update}
           />
         </div>
         <div className={styles.containerInput}>
@@ -53,6 +71,9 @@ function Register() {
             label="E-mail"
             icon={emailIcon}
             iconActive={emailIconActive}
+            id="email"
+            value={form.email}
+            onChange={update}
           />
         </div>
         <div className={styles.containerInput}>
@@ -61,6 +82,9 @@ function Register() {
             label="Documento"
             icon={dniIcon}
             iconActive={dniIconActive}
+            id="dni"
+            value={form.dni}
+            onChange={update}
           />
         </div>
         <div className={styles.containerButtonCheckbox}>

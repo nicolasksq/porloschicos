@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import emailIcon from 'assets/mail.svg';
@@ -10,6 +10,15 @@ import Button from 'components/Button';
 import styles from './index.module.scss';
 
 function FormRestorePassword() {
+  const [form, setState] = useState({
+    email: '',
+  });
+  const update = (e) => {
+    setState({
+      ...form,
+      [e.target.id]: e.target.value,
+    });
+  };
   return (
     <>
       <p className={styles.subtitle}>
@@ -22,6 +31,9 @@ function FormRestorePassword() {
             label="E-mail"
             icon={emailIcon}
             iconActive={emailIconActive}
+            id="email"
+            value="email"
+            onChange={update}
           />
         </div>
         <div className={styles.containerButton}>

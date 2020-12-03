@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import getGreeting from 'helpers';
@@ -16,6 +16,16 @@ import passIconActive from 'assets/password-blue.svg';
 import styles from './index.module.scss';
 
 function Login() {
+  const [form, setState] = useState({
+    username: '',
+    password: '',
+  });
+  const update = (e) => {
+    setState({
+      ...form,
+      [e.target.id]: e.target.value,
+    });
+  };
   return (
     <ContainerAuth
       topText="¿No tenés cuenta?"
@@ -32,6 +42,9 @@ function Login() {
             label="usuario"
             icon={userIcon}
             iconActive={userIconActive}
+            id="username"
+            value={form.username}
+            onChange={update}
           />
         </div>
         <div className={styles.containerInput}>
@@ -41,6 +54,9 @@ function Login() {
             type="password"
             icon={passIcon}
             iconActive={passIconActive}
+            id="password"
+            value={form.password}
+            onChange={update}
           />
           <Link className={styles.link} to="/forgot-password">
             ¿Olvidaste la contraseña?
