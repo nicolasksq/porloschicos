@@ -3,20 +3,20 @@ import PropTypes from 'prop-types';
 
 import styles from './index.module.scss';
 
-function Button({ children, submit, variantStyle }) {
+function Button({ children, type, variantStyle }) {
   return (
-    <button className={styles[variantStyle]} type={submit ? 'submit' : 'button'}>{children}</button>
+    <button className={styles[variantStyle]} type={type === 'submit' ? 'submit' : 'button'}>{children}</button>
   );
 }
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  submit: PropTypes.bool,
+  type: PropTypes.string,
   variantStyle: PropTypes.oneOf(['light', 'anchor', 'primary']),
 };
 
 Button.defaultProps = {
-  submit: false,
+  type: 'button',
   variantStyle: 'primary',
 };
 

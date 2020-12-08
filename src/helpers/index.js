@@ -1,3 +1,9 @@
 import getGreeting from './getGreetings';
+import validateLength from './validateLength';
+import validateEmail from './validateEmail';
 
-export default getGreeting;
+export {
+  getGreeting,
+  validateLength,
+  validateEmail,
+};

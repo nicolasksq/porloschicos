@@ -1,5 +1,5 @@
 import React from 'react';
-import getGreeting from 'helpers';
+import { getGreeting } from 'helpers';
 
 import Title from 'components/Title';
 import ContainerAuth from 'components/ContainerAuth';

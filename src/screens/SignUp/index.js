@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import getGreeting from 'helpers';
+import { getGreeting, validateLength, validateEmail } from 'helpers';
 
 import ContainerAuth from 'components/ContainerAuth';
 import Input from 'components/Input';
@@ -20,18 +20,76 @@ import dniIconActive from 'assets/id-card-blue.svg';
 import styles from './index.module.scss';
 
 function Register() {
-  const [form, setState] = useState({
+  const [form, setForm] = useState({
     username: '',
     password: '',
     email: '',
     dni: '',
   });
-  const update = (e) => {
-    setState({
-      ...form,
-      [e.target.id]: e.target.value,
-    });
+
+  const [errors, setErrors] = useState({
+    username: '',
+    password: '',
+    email: '',
+    dni: '',
+  });
+
+  const handleChange = ({ target: { id, value } }) => {
+    setForm((lastForm) => ({ ...lastForm, [id]: value }));
+    setErrors((lastErrors) => ({ ...lastErrors, [id]: '' }));
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const {
+      username, password, email, dni,
+    } = form;
+
+    const {
+      isValid: usernameIsValid,
+      error: errorUsername,
+    } = validateLength({
+      minLength: 6, maxLength: 20, str: username, name: 'usuario',
+    });
+
+    const {
+      isValid: passwordIsValid,
+      error: errorPassword,
+    } = validateLength({ minLength: 6, str: password, name: 'contraseña' });
+
+    const {
+      isValid: dniIsValid,
+    } = validateLength({
+      minLength: 8, maxLength: 8, str: dni, name: 'documento',
+    });
+
+    const dniFormatIsValid = /^[0-9]{8}$/.test(dni);
+
+    const { emailIsValid, errorEmail } = validateEmail(email);
+
+    if (!usernameIsValid) {
+      setErrors((lastErrors) => ({ ...lastErrors, username: errorUsername }));
+    }
+
+    if (!passwordIsValid) {
+      setErrors((lastErrors) => ({ ...lastErrors, password: errorPassword }));
+    }
+
+    if (!emailIsValid) {
+      setErrors((lastErrors) => ({ ...lastErrors, email: errorEmail }));
+    }
+
+    if (!dniIsValid || !dniFormatIsValid) {
+      setErrors((lastErrors) => ({ ...lastErrors, dni: 'El documento es invalido' }));
+    }
+
+    if (usernameIsValid && passwordIsValid && dniIsValid && dniFormatIsValid) {
+      console.log('sending....');
+      console.log(form);
+    }
+  };
+
   return (
     <ContainerAuth
       topText="¿Ya tenés una cuenta?"
@@ -41,16 +99,17 @@ function Register() {
       <Title upperTitle={getGreeting()}>
         Registrate
       </Title>
-      <form className="form" action="">
+      <form className="form" onSubmit={handleSubmit}>
         <div className={styles.containerInput}>
           <Input
             htmlFor="username"
             label="Usuario"
             icon={userIcon}
             iconActive={userIconActive}
-            id="username"
             value={form.username}
-            onChange={update}
+            onChange={handleChange}
+            error={errors.username}
+            required
           />
         </div>
         <div className={styles.containerInput}>
@@ -60,35 +119,40 @@ function Register() {
             type="password"
             icon={passIcon}
             iconActive={passIconActive}
-            id="password"
             value={form.password}
-            onChange={update}
+            onChange={handleChange}
+            error={errors.password}
+            required
           />
         </div>
         <div className={styles.containerInput}>
           <Input
-            htmlFor="e-mail"
+            htmlFor="email"
             label="E-mail"
+            type="email"
             icon={emailIcon}
             iconActive={emailIconActive}
-            id="email"
             value={form.email}
-            onChange={update}
+            onChange={handleChange}
+            error={errors.email}
+            required
           />
         </div>
         <div className={styles.containerInput}>
           <Input
             htmlFor="dni"
             label="Documento"
+            type="number"
             icon={dniIcon}
             iconActive={dniIconActive}
-            id="dni"
             value={form.dni}
-            onChange={update}
+            onChange={handleChange}
+            error={errors.dni}
+            required
           />
         </div>
         <div className={styles.containerButtonCheckbox}>
-          <Button>Iniciar Sesión</Button>
+          <Button type="submit">Iniciar Sesión</Button>
         </div>
       </form>
       <AuthFbGoogle />

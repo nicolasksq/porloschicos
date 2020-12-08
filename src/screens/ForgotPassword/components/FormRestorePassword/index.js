@@ -4,40 +4,59 @@ import { Link } from 'react-router-dom';
 import emailIcon from 'assets/mail.svg';
 import emailIconActive from 'assets/mail-blue.svg';
 
+import { validateEmail } from 'helpers';
+
 import Input from 'components/Input';
 import Button from 'components/Button';
 
 import styles from './index.module.scss';
 
 function FormRestorePassword() {
-  const [form, setState] = useState({
-    email: '',
+  const [email, setEmail] = useState({
+    value: '',
+    errorEmail: '',
   });
-  const update = (e) => {
-    setState({
-      ...form,
-      [e.target.id]: e.target.value,
+
+  const handleChange = ({ target: { value } }) => {
+    setEmail({
+      errorEmail: '',
+      value,
     });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { emailIsValid, errorEmail } = validateEmail(email.value);
+
+    if (!emailIsValid) {
+      setEmail((last) => ({ ...last, errorEmail }));
+    } else {
+      console.log(`sending.. to ${email.value}`);
+    }
+  };
+
   return (
     <>
       <p className={styles.subtitle}>
         Ingresá tu e-mail y te enviaremos instrucciones para restablecer la contraseña
       </p>
-      <form className="form" action="">
+      <form className="form" onSubmit={handleSubmit}>
         <div className={styles.containerInput}>
           <Input
-            htmlFor="e-mail"
+            htmlFor="email"
             label="E-mail"
+            type="email"
+            value={email.value}
             icon={emailIcon}
             iconActive={emailIconActive}
-            id="email"
-            value="email"
-            onChange={update}
+            onChange={handleChange}
+            error={email.errorEmail}
+            required
           />
         </div>
         <div className={styles.containerButton}>
-          <Button>Restablecer contraseña</Button>
+          <Button type="submit">Restablecer contraseña</Button>
           <Link to="/login">
             Regresar a iniciar sesión
           </Link>

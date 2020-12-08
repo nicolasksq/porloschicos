@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import getGreeting from 'helpers';
+import { getGreeting, validateLength } from 'helpers';
 import ContainerAuth from 'components/ContainerAuth';
 import Input from 'components/Input';
 import Title from 'components/Title';
@@ -16,16 +16,50 @@ import passIconActive from 'assets/password-blue.svg';
 import styles from './index.module.scss';
 
 function Login() {
-  const [form, setState] = useState({
+  const [form, setForm] = useState({
     username: '',
     password: '',
   });
-  const update = (e) => {
-    setState({
-      ...form,
-      [e.target.id]: e.target.value,
-    });
+
+  const [errors, setErrors] = useState({
+    username: '',
+    password: '',
+  });
+
+  const handleChange = ({ target: { id, value } }) => {
+    setForm((lastForm) => ({ ...lastForm, [id]: value }));
+    setErrors((lastErrors) => ({ ...lastErrors, [id]: '' }));
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { username, password } = form;
+
+    const {
+      isValid: usernameIsValid,
+      error: errorUsername,
+    } = validateLength({
+      minLength: 6, maxLength: 20, str: username, name: 'username',
+    });
+
+    const {
+      isValid: passwordIsValid,
+      error: errorPassword,
+    } = validateLength({ minLength: 6, str: password, name: 'contraseña' });
+
+    if (!usernameIsValid) {
+      setErrors((lastErrors) => ({ ...lastErrors, username: errorUsername }));
+    }
+
+    if (!passwordIsValid) {
+      setErrors((lastErrors) => ({ ...lastErrors, password: errorPassword }));
+    }
+
+    if (usernameIsValid && passwordIsValid) {
+      console.log('sending....');
+    }
+  };
+
   return (
     <ContainerAuth
       topText="¿No tenés cuenta?"
@@ -35,16 +69,17 @@ function Login() {
       <Title upperTitle={getGreeting()}>
         Iniciar Sesión
       </Title>
-      <form className="form" action="">
+      <form className="form" onSubmit={handleSubmit}>
         <div className={styles.containerInput}>
           <Input
             htmlFor="username"
             label="usuario"
             icon={userIcon}
             iconActive={userIconActive}
-            id="username"
             value={form.username}
-            onChange={update}
+            onChange={handleChange}
+            error={errors.username}
+            required
           />
         </div>
         <div className={styles.containerInput}>
@@ -54,9 +89,10 @@ function Login() {
             type="password"
             icon={passIcon}
             iconActive={passIconActive}
-            id="password"
             value={form.password}
-            onChange={update}
+            onChange={handleChange}
+            error={errors.password}
+            required
           />
           <Link className={styles.link} to="/forgot-password">
             ¿Olvidaste la contraseña?
@@ -70,7 +106,7 @@ function Login() {
               label="Recordar Contraseña"
             />
           </div>
-          <Button>Iniciar Sesión</Button>
+          <Button type="submit">Iniciar Sesión</Button>
         </div>
       </form>
       <AuthFbGoogle />
