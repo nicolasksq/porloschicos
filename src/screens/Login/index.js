@@ -39,7 +39,7 @@ function Login() {
       isValid: usernameIsValid,
       error: errorUsername,
     } = validateLength({
-      minLength: 6, maxLength: 20, str: username, name: 'username',
+      minLength: 6, maxLength: 20, str: username, name: 'usuario',
     });
 
     const {

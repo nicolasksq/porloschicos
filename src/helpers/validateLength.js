@@ -1,19 +1,27 @@
 const validateLength = ({
   minLength = 1, maxLength = 50, name = 'string', str = '',
 } = {}) => {
-  const result = {
-    error: `El campo ${name} debe tener entre ${minLength} y ${maxLength} caracteres`,
+  const resultMin = {
+    error: `El campo ${name} debe ser mayor a ${minLength} caracteres`,
+    isValid: false,
+  };
+
+  const resultMax = {
+    error: `El campo ${name} debe ser menor a ${maxLength} caracteres`,
     isValid: false,
   };
 
   if (str.length >= minLength && str.length <= maxLength) {
-    result.error = '';
-    result.isValid = true;
+    resultMin.error = '';
+    resultMin.isValid = true;
 
-    return result;
+    return resultMin;
   }
 
-  return result;
+  if (str.length <= minLength) {
+    return resultMin;
+  }
+  return resultMax;
 };
 
 export default validateLength;
