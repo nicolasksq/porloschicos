@@ -16,6 +16,7 @@ import emailIcon from 'assets/mail.svg';
 import emailIconActive from 'assets/mail-blue.svg';
 import dniIcon from 'assets/id-card.svg';
 import dniIconActive from 'assets/id-card-blue.svg';
+import { postDataUser } from '../../service/reproService';
 
 import styles from './index.module.scss';
 
@@ -37,6 +38,19 @@ function Register() {
   const handleChange = ({ target: { id, value } }) => {
     setForm((lastForm) => ({ ...lastForm, [id]: value }));
     setErrors((lastErrors) => ({ ...lastErrors, [id]: '' }));
+  };
+
+  const useEffect = async () => {
+    const {
+      username, password, email, dni,
+    } = form;
+    console.log(form);
+    const data = {
+      username, password, email, dni,
+    };
+    const res = await postDataUser(data);
+    setForm({ visible: false });
+    console.log(res);
   };
 
   const handleSubmit = (e) => {
@@ -85,8 +99,7 @@ function Register() {
     }
 
     if (usernameIsValid && passwordIsValid && dniIsValid && dniFormatIsValid) {
-      console.log('sending....');
-      console.log(form);
+      useEffect((lastForm) => ({ ...lastForm }));
     }
   };
 
@@ -99,7 +112,10 @@ function Register() {
       <Title upperTitle={getGreeting()}>
         Registrate
       </Title>
-      <form className="form" onSubmit={handleSubmit}>
+      <form
+        className="form"
+        onSubmit={handleSubmit}
+      >
         <div className={styles.containerInput}>
           <Input
             htmlFor="username"

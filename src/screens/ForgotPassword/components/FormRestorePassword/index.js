@@ -8,6 +8,7 @@ import { validateEmail } from 'helpers';
 
 import Input from 'components/Input';
 import Button from 'components/Button';
+import { postDataUser } from '../../../../service/reproService';
 
 import styles from './index.module.scss';
 
@@ -24,6 +25,13 @@ function FormRestorePassword() {
     });
   };
 
+  const useEffect = async () => {
+    const data = { email };
+    const res = await postDataUser(data);
+    setEmail({ visible: false });
+    console.log(res);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -33,6 +41,7 @@ function FormRestorePassword() {
       setEmail((last) => ({ ...last, errorEmail }));
     } else {
       console.log(`sending.. to ${email.value}`);
+      useEffect((last) => ({ ...last }));
     }
   };
 

@@ -12,6 +12,7 @@ import userIcon from 'assets/user-grey.svg';
 import userIconActive from 'assets/user-blue.svg';
 import passIcon from 'assets/password-grey.svg';
 import passIconActive from 'assets/password-blue.svg';
+import { postDataUser } from '../../service/reproService';
 
 import styles from './index.module.scss';
 
@@ -29,6 +30,14 @@ function Login() {
   const handleChange = ({ target: { id, value } }) => {
     setForm((lastForm) => ({ ...lastForm, [id]: value }));
     setErrors((lastErrors) => ({ ...lastErrors, [id]: '' }));
+  };
+
+  const useEffect = async () => {
+    const { username, password } = form;
+    const data = { username, password };
+    const res = await postDataUser(data);
+    setForm({ visible: false });
+    console.log(res);
   };
 
   const handleSubmit = (e) => {
@@ -56,7 +65,7 @@ function Login() {
     }
 
     if (usernameIsValid && passwordIsValid) {
-      console.log('sending....');
+      useEffect((lastForm) => ({ ...lastForm }));
     }
   };
 
@@ -69,7 +78,10 @@ function Login() {
       <Title upperTitle={getGreeting()}>
         Iniciar Sesión
       </Title>
-      <form className="form" onSubmit={handleSubmit}>
+      <form
+        className="form"
+        onSubmit={handleSubmit}
+      >
         <div className={styles.containerInput}>
           <Input
             htmlFor="username"

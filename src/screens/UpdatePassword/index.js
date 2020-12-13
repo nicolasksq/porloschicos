@@ -8,6 +8,7 @@ import ContainerAuth from 'components/ContainerAuth';
 import Input from 'components/Input';
 import Button from 'components/Button';
 import Title from 'components/Title';
+import { postDataUser } from '../../service/reproService';
 
 import styles from './index.module.scss';
 
@@ -24,6 +25,13 @@ function UpdatePassword() {
     });
   };
 
+  const useEffect = async () => {
+    const data = { password };
+    const res = await postDataUser(data);
+    setPassword({ visible: false });
+    console.log(res);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -35,7 +43,7 @@ function UpdatePassword() {
     if (!passwordIsValid) {
       setPassword((last) => ({ ...last, errorPassword }));
     } else {
-      console.log('sending');
+      useEffect((last) => ({ ...last }));
     }
   };
 
