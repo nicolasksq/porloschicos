@@ -25,10 +25,9 @@ function UpdatePassword() {
     });
   };
 
-  const useEffect = async () => {
+  const sendForm = async () => {
     const data = { password };
     const res = await postDataUser(data);
-    setPassword({ visible: false });
     console.log(res);
   };
 
@@ -43,7 +42,7 @@ function UpdatePassword() {
     if (!passwordIsValid) {
       setPassword((last) => ({ ...last, errorPassword }));
     } else {
-      useEffect((last) => ({ ...last }));
+      sendForm();
     }
   };
 

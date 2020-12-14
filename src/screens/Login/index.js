@@ -32,11 +32,10 @@ function Login() {
     setErrors((lastErrors) => ({ ...lastErrors, [id]: '' }));
   };
 
-  const useEffect = async () => {
+  const sendForm = async () => {
     const { username, password } = form;
     const data = { username, password };
     const res = await postDataUser(data);
-    setForm({ visible: false });
     console.log(res);
   };
 
@@ -65,7 +64,7 @@ function Login() {
     }
 
     if (usernameIsValid && passwordIsValid) {
-      useEffect((lastForm) => ({ ...lastForm }));
+      sendForm();
     }
   };
 

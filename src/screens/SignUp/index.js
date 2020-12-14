@@ -40,7 +40,7 @@ function Register() {
     setErrors((lastErrors) => ({ ...lastErrors, [id]: '' }));
   };
 
-  const useEffect = async () => {
+  const sendForm = async () => {
     const {
       username, password, email, dni,
     } = form;
@@ -49,7 +49,6 @@ function Register() {
       username, password, email, dni,
     };
     const res = await postDataUser(data);
-    setForm({ visible: false });
     console.log(res);
   };
 
@@ -99,7 +98,7 @@ function Register() {
     }
 
     if (usernameIsValid && passwordIsValid && dniIsValid && dniFormatIsValid) {
-      useEffect((lastForm) => ({ ...lastForm }));
+      sendForm();
     }
   };
 

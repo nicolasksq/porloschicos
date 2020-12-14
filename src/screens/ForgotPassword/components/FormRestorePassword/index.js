@@ -25,10 +25,9 @@ function FormRestorePassword() {
     });
   };
 
-  const useEffect = async () => {
+  const sendForm = async () => {
     const data = { email };
     const res = await postDataUser(data);
-    setEmail({ visible: false });
     console.log(res);
   };
 
@@ -40,8 +39,7 @@ function FormRestorePassword() {
     if (!emailIsValid) {
       setEmail((last) => ({ ...last, errorEmail }));
     } else {
-      console.log(`sending.. to ${email.value}`);
-      useEffect((last) => ({ ...last }));
+      sendForm();
     }
   };
 
