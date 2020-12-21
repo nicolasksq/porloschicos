@@ -1,31 +1,33 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getGreeting, validateLength } from 'helpers';
+import { getGreeting, validateLength, validateEmail } from 'helpers';
 import ContainerAuth from 'components/ContainerAuth';
 import Input from 'components/Input';
 import Title from 'components/Title';
 import Button from 'components/Button';
 import AuthFbGoogle from 'components/AuthFbGoogle';
 
-import userIcon from 'assets/user-grey.svg';
-import userIconActive from 'assets/user-blue.svg';
+import emailIcon from 'assets/mail.svg';
+import emailIconActive from 'assets/mail-blue.svg';
 import passIcon from 'assets/password-grey.svg';
 import passIconActive from 'assets/password-blue.svg';
-import { postDataUser } from '../../service/reproService';
+import { loginService } from '../../services/authService';
 
 import styles from './index.module.scss';
 
 function Login() {
   const [form, setForm] = useState({
-    username: '',
+    email: '',
     password: '',
   });
 
   const [errors, setErrors] = useState({
-    username: '',
+    email: '',
     password: '',
   });
+
+  const [isSending, setIsSending] = useState(false);
 
   const handleChange = ({ target: { id, value } }) => {
     setForm((lastForm) => ({ ...lastForm, [id]: value }));
@@ -33,37 +35,47 @@ function Login() {
   };
 
   const sendForm = async () => {
-    const { username, password } = form;
-    const data = { username, password };
-    const res = await postDataUser(data);
-    console.log(res);
+    setIsSending(true);
+
+    try {
+      const res = await loginService(form);
+      console.log(res);
+    } catch (error) {
+      const nameError = error.response.data.error;
+      console.log(
+        `status: ${error.response.data.status}`,
+        `code error: ${error.response.data.errorCode}`,
+        `name error: ${error.response.data.error}`,
+      );
+
+      if (nameError === 'INVALID_CREDENTIALS') {
+        setErrors((lastErrors) => ({ ...lastErrors, password: 'El usuario o la contraseña son invalidos' }));
+      }
+    }
+
+    setIsSending(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { username, password } = form;
+    const { email, password } = form;
 
-    const {
-      isValid: usernameIsValid,
-      error: errorUsername,
-    } = validateLength({
-      minLength: 6, maxLength: 20, str: username, name: 'usuario',
-    });
+    const { emailIsValid, errorEmail } = validateEmail(email);
 
     const {
       isValid: passwordIsValid,
       error: errorPassword,
     } = validateLength({ minLength: 6, str: password, name: 'contraseña' });
 
-    if (!usernameIsValid) {
-      setErrors((lastErrors) => ({ ...lastErrors, username: errorUsername }));
+    if (!emailIsValid) {
+      setErrors((lastErrors) => ({ ...lastErrors, email: errorEmail }));
     }
 
     if (!passwordIsValid) {
       setErrors((lastErrors) => ({ ...lastErrors, password: errorPassword }));
     }
 
-    if (usernameIsValid && passwordIsValid) {
+    if (passwordIsValid && emailIsValid) {
       sendForm();
     }
   };
@@ -83,13 +95,14 @@ function Login() {
       >
         <div className={styles.containerInput}>
           <Input
-            htmlFor="username"
-            label="usuario"
-            icon={userIcon}
-            iconActive={userIconActive}
-            value={form.username}
+            htmlFor="email"
+            label="E-mail"
+            type="email"
+            icon={emailIcon}
+            iconActive={emailIconActive}
+            value={form.email}
             onChange={handleChange}
-            error={errors.username}
+            error={errors?.email}
             required
           />
         </div>
@@ -117,7 +130,7 @@ function Login() {
               label="Recordar Contraseña"
             />
           </div>
-          <Button type="submit">Iniciar Sesión</Button>
+          <Button loading={isSending} disabled={isSending} type="submit">Iniciar Sesión</Button>
         </div>
       </form>
       <AuthFbGoogle />

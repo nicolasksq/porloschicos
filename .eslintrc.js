@@ -24,6 +24,7 @@ module.exports = {
         some: ['nesting', 'id'],
       },
     }],
+    'react/jsx-props-no-spreading': 'off',
   },
   settings: {
     'import/resolver': {

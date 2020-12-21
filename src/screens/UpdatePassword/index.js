@@ -8,7 +8,7 @@ import ContainerAuth from 'components/ContainerAuth';
 import Input from 'components/Input';
 import Button from 'components/Button';
 import Title from 'components/Title';
-import { postDataUser } from '../../service/reproService';
+import { postDataUser } from '../../services/reproService';
 
 import styles from './index.module.scss';
 

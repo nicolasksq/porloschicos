@@ -8,7 +8,7 @@ import { validateEmail } from 'helpers';
 
 import Input from 'components/Input';
 import Button from 'components/Button';
-import { postDataUser } from '../../../../service/reproService';
+import { postDataUser } from '../../../../services/reproService';
 
 import styles from './index.module.scss';
 
