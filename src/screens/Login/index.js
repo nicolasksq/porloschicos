@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+
+import { AuthContext } from 'context/AuthContext';
 
 import { getGreeting, validateLength, validateEmail } from 'helpers';
 import ContainerAuth from 'components/ContainerAuth';
@@ -16,18 +19,26 @@ import { loginService } from '../../services/authService';
 
 import styles from './index.module.scss';
 
-function Login() {
+function Login(props) {
   const [form, setForm] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
   const [errors, setErrors] = useState({
-    email: '',
+    username: '',
     password: '',
   });
 
   const [isSending, setIsSending] = useState(false);
+
+  const [dataAuth, setDataAuth] = useContext(AuthContext);
+
+  useEffect(() => {
+    if (dataAuth.token !== '') {
+      props.history.push('/private');
+    }
+  }, [dataAuth]);
 
   const handleChange = ({ target: { id, value } }) => {
     setForm((lastForm) => ({ ...lastForm, [id]: value }));
@@ -39,7 +50,9 @@ function Login() {
 
     try {
       const res = await loginService(form);
-      console.log(res);
+      const { token } = res.data;
+      localStorage.setItem('token', token);
+      setDataAuth((lastData) => ({ ...lastData, token }));
     } catch (error) {
       const nameError = error.response.data.error;
       console.log(
@@ -58,9 +71,9 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = form;
+    const { username, password } = form;
 
-    const { emailIsValid, errorEmail } = validateEmail(email);
+    const { emailIsValid, errorEmail } = validateEmail(username);
 
     const {
       isValid: passwordIsValid,
@@ -68,14 +81,14 @@ function Login() {
     } = validateLength({ minLength: 6, str: password, name: 'contraseña' });
 
     if (!emailIsValid) {
-      setErrors((lastErrors) => ({ ...lastErrors, email: errorEmail }));
+      setErrors((lastErrors) => ({ ...lastErrors, username: errorEmail }));
     }
 
     if (!passwordIsValid) {
       setErrors((lastErrors) => ({ ...lastErrors, password: errorPassword }));
     }
 
-    if (passwordIsValid && emailIsValid) {
+    if (passwordIsValid) {
       sendForm();
     }
   };
@@ -95,14 +108,13 @@ function Login() {
       >
         <div className={styles.containerInput}>
           <Input
-            htmlFor="email"
+            htmlFor="username"
             label="E-mail"
-            type="email"
             icon={emailIcon}
             iconActive={emailIconActive}
-            value={form.email}
+            value={form.username}
             onChange={handleChange}
-            error={errors?.email}
+            error={errors?.username}
             required
           />
         </div>
@@ -138,4 +150,8 @@ function Login() {
   );
 }
 
+// this is wrong, i'll fix it later
+Login.propTypes = {
+  history: PropTypes.instanceOf(PropTypes.object).isRequired,
+};
 export default Login;
