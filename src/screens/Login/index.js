@@ -31,6 +31,7 @@ function Login(props) {
   });
 
   const [isSending, setIsSending] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [dataAuth, setDataAuth] = useContext(AuthContext);
 
@@ -38,6 +39,7 @@ function Login(props) {
     if (dataAuth.token !== '') {
       props.history.push('/private');
     }
+    setIsLoading(false);
   }, [dataAuth]);
 
   const handleChange = ({ target: { id, value } }) => {
@@ -54,15 +56,22 @@ function Login(props) {
       localStorage.setItem('token', token);
       setDataAuth((lastData) => ({ ...lastData, token }));
     } catch (error) {
-      const nameError = error.response.data.error;
+      const nameError = error.response?.data.error;
+      const codeError = error.response?.data.errorCode;
+
       console.log(
-        `status: ${error.response.data.status}`,
-        `code error: ${error.response.data.errorCode}`,
-        `name error: ${error.response.data.error}`,
+        `status: ${error.response?.data.status}`,
+        `code error: ${error.response?.data.errorCode}`,
+        `name error: ${error.response?.data.error}`,
+        codeError,
       );
 
       if (nameError === 'INVALID_CREDENTIALS') {
-        setErrors((lastErrors) => ({ ...lastErrors, password: 'El usuario o la contraseña son invalidos' }));
+        setErrors((lastErrors) => ({ ...lastErrors, password: 'El usuario o la contraseña no coinciden' }));
+      }
+
+      if (!codeError && codeError !== 0) {
+        setErrors((lastErrors) => ({ ...lastErrors, password: 'Hubo un error intente mas tarde' }));
       }
     }
 
@@ -98,6 +107,7 @@ function Login(props) {
       topText="¿No tenés cuenta?"
       topLink="Registrate"
       linkTo="sign-up"
+      loading={isLoading}
     >
       <Title upperTitle={getGreeting()}>
         Iniciar Sesión
@@ -114,7 +124,7 @@ function Login(props) {
             iconActive={emailIconActive}
             value={form.username}
             onChange={handleChange}
-            error={errors?.username}
+            error={errors.username}
             required
           />
         </div>
@@ -150,8 +160,10 @@ function Login(props) {
   );
 }
 
-// this is wrong, i'll fix it later
 Login.propTypes = {
-  history: PropTypes.instanceOf(PropTypes.object).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
+
 export default Login;

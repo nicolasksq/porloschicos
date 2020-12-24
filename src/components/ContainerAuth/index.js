@@ -4,15 +4,18 @@ import { Link } from 'react-router-dom';
 
 import ilustration from 'assets/ilustration.svg';
 import logo from 'assets/PLC_Logo_Horizontal.svg';
-// import FormLogin from './components/FormLogin';
-// import RestorePassword from './components/RestorePassword';
-// import Register from './components/Register';
+
+import Loader from 'components/Loader';
 
 import styles from './index.module.scss';
 
 function ContainerAuth({
-  children, topText, topLink, linkTo,
+  children, topText, topLink, linkTo, loading,
 }) {
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.containerIlustration}>
@@ -47,12 +50,14 @@ ContainerAuth.propTypes = {
   topText: PropTypes.string,
   topLink: PropTypes.string,
   linkTo: PropTypes.string,
+  loading: PropTypes.bool,
 };
 
 ContainerAuth.defaultProps = {
   topText: null,
   topLink: null,
   linkTo: null,
+  loading: false,
 };
 
 export default ContainerAuth;

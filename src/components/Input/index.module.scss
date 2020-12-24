@@ -10,14 +10,18 @@
   }
 }
 
+.containerErrors {
+  font-size: 14.5px;
+  font-weight: 400;
+  margin: 8px 2px 0 2px;
+}
+
 .error {
   color: #FF5F58;
   padding: 0;
-  margin: 4px 2px;
-  font-size: 14.5px;
-  font-weight: 300;
   animation-name: showError;
   animation-duration: .5s;
+  margin-right: 3px;
 }
 
 @keyframes showError {

@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import styles from './index.module.scss';
 
 function Input({
-  label, htmlFor, type, error, iconActive, icon, onClick, onChange, value, required,
+  label, htmlFor, type, error, iconActive, icon, onClick, onChange, value, required, errorLink,
 }) {
   return (
     <>
@@ -21,13 +22,6 @@ function Input({
           value={value}
           required={required}
         />
-        { error && (
-        <p className={styles.error}>
-          {' '}
-          { error }
-          {' '}
-        </p>
-        ) }
         { icon
           && (
           <div className={styles.containerIcon}>
@@ -35,6 +29,23 @@ function Input({
             <img className={styles.iconActive} src={iconActive || icon} alt=" " />
           </div>
           )}
+
+        { error && (
+          <div className={styles.containerErrors}>
+            <span className={styles.error}>
+              {' '}
+              { error }
+              {' '}
+            </span>
+
+            { errorLink?.linkTo && errorLink?.message && (
+            <Link to={errorLink.linkTo}>
+              {errorLink.message}
+            </Link>
+            )}
+          </div>
+        ) }
+
       </div>
     </>
   );
@@ -51,6 +62,10 @@ Input.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string,
   required: PropTypes.bool,
+  errorLink: PropTypes.shape({
+    linkTo: PropTypes.string,
+    message: PropTypes.string,
+  }),
 };
 
 Input.defaultProps = {
@@ -62,6 +77,7 @@ Input.defaultProps = {
   onChange: null,
   value: '',
   required: false,
+  errorLink: null,
 };
 
 export default Input;

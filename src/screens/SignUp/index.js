@@ -30,9 +30,17 @@ function Register() {
     du: '',
   });
 
+  const [errorsLink, setErrorsLink] = useState({
+    username: {
+      message: '',
+      linkTo: '',
+    },
+  });
+
   const handleChange = ({ target: { id, value } }) => {
     setForm((lastForm) => ({ ...lastForm, [id]: value }));
     setErrors((lastErrors) => ({ ...lastErrors, [id]: '' }));
+    setErrorsLink({ username: {} });
   };
 
   const sendForm = async () => {
@@ -45,11 +53,16 @@ function Register() {
         username: '', password: '', email: '', du: '',
       });
     } catch (error) {
-      console.log(
-        `status: ${error.response.data.status}`,
-        `code error: ${error.response.data.errorCode}`,
-        `name error: ${error.response.data.error}`,
-      );
+      const errorCode = error.response?.data.errorCode;
+
+      if (errorCode === 100) {
+        setErrors((last) => ({ ...last, username: 'Este e-mail ya se encuentra registrado.' }));
+        setErrorsLink({ username: { linkTo: '/login', message: 'Iniciar Sesión' } });
+      }
+
+      if (!errorCode && errorCode !== 0) {
+        setErrors((last) => ({ ...last, du: 'Hubo un error intente más tarde' }));
+      }
     }
 
     setIsSending(false);
@@ -84,6 +97,16 @@ function Register() {
 
     const { emailIsValid, errorEmail } = validateEmail(email);
 
+    const allValidations = [
+      usernameIsValid,
+      passwordIsValid,
+      dniIsValid,
+      dniFormatIsValid,
+      emailIsValid,
+    ];
+
+    const passAllValidations = allValidations.every((validation) => validation);
+
     if (!usernameIsValid) {
       setErrors((lastErrors) => ({ ...lastErrors, username: errorUsername }));
     }
@@ -100,7 +123,7 @@ function Register() {
       setErrors((lastErrors) => ({ ...lastErrors, du: 'El documento es invalido' }));
     }
 
-    if (usernameIsValid && passwordIsValid && dniIsValid && dniFormatIsValid) {
+    if (passAllValidations) {
       sendForm();
     }
   };
@@ -126,6 +149,7 @@ function Register() {
               value={form[name]}
               onChange={handleChange}
               error={errors[name]}
+              errorLink={errorsLink[name]}
               {...rest}
             />
           </div>
