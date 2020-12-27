@@ -11,6 +11,7 @@ import AuthFbGoogle from 'components/AuthFbGoogle';
 import { signUpService } from '../../services/authService';
 
 import DATA_INPUTS from './contants/inputs';
+import MessageExit from './MessageExit/index';
 import styles from './index.module.scss';
 
 function Register() {
@@ -125,6 +126,7 @@ function Register() {
 
     if (passAllValidations) {
       sendForm();
+        <MessageExit />;
     }
   };
 

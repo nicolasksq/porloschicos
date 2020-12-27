@@ -8,7 +8,8 @@ import ContainerAuth from 'components/ContainerAuth';
 import Input from 'components/Input';
 import Button from 'components/Button';
 import Title from 'components/Title';
-import { postDataUser } from '../../services/reproService';
+import NewPasswordExit from './NewPassExit';
+import { postDataUser } from '../../services/authService';
 
 import styles from './index.module.scss';
 
@@ -43,6 +44,7 @@ function UpdatePassword() {
       setPassword((last) => ({ ...last, errorPassword }));
     } else {
       sendForm();
+        <NewPasswordExit />;
     }
   };
 
