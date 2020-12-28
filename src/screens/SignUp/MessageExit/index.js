@@ -7,7 +7,7 @@ function MessageExit() {
     <>
       <div className={styles.containerMessage}>
         <Title Tag="h2">
-          Ya casi...
+          Registro Exitoso
         </Title>
         <p className={styles.messageSuccess}>
           Recibira un mail para completar el registro.

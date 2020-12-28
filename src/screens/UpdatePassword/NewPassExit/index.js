@@ -12,7 +12,7 @@ function NewPasswordExit() {
           Contraseña Actualizada
         </Title>
         <p className={styles.messageSuccess}>
-          Ahora ya pude iniciar sesión.
+          Ahora ya puede iniciar sesión.
         </p>
         <Button>
           <Link to="/login">
