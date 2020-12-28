@@ -20,6 +20,7 @@ function Register() {
     password: '',
     email: '',
     du: '',
+    complete: false,
   });
 
   const [isSending, setIsSending] = useState(false);
@@ -126,7 +127,7 @@ function Register() {
 
     if (passAllValidations) {
       sendForm();
-        <MessageExit />;
+      setForm((lastForm) => ({ ...lastForm, complete: true }));
     }
   };
 
@@ -157,10 +158,13 @@ function Register() {
           </div>
         ))}
         <div className={styles.containerButtonCheckbox}>
-          <Button loading={isSending} disabled={isSending} type="submit">Iniciar Sesión</Button>
+          <Button loading={isSending} disabled={isSending} type="submit"> Registrarse </Button>
         </div>
       </form>
       <AuthFbGoogle />
+      {
+        form.complete && <MessageExit />
+      }
     </ContainerAuth>
   );
 }

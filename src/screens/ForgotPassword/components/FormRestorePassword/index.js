@@ -8,7 +8,7 @@ import { validateEmail } from 'helpers';
 
 import Input from 'components/Input';
 import Button from 'components/Button';
-import { postDataUser } from '../../../../services/authService';
+import { loginService } from '../../../../services/authService';
 
 import styles from './index.module.scss';
 
@@ -27,7 +27,7 @@ function FormRestorePassword() {
 
   const sendForm = async () => {
     const data = { email };
-    const res = await postDataUser(data);
+    const res = await loginService(data);
     console.log(res);
   };
 

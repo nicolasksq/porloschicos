@@ -9,7 +9,7 @@ import Input from 'components/Input';
 import Button from 'components/Button';
 import Title from 'components/Title';
 import NewPasswordExit from './NewPassExit';
-import { postDataUser } from '../../services/authService';
+import { loginService } from '../../services/authService';
 
 import styles from './index.module.scss';
 
@@ -17,6 +17,7 @@ function UpdatePassword() {
   const [password, setPassword] = useState({
     value: '',
     passwordError: '',
+    newPassword: false,
   });
 
   const handleChange = ({ target: { value } }) => {
@@ -28,7 +29,7 @@ function UpdatePassword() {
 
   const sendForm = async () => {
     const data = { password };
-    const res = await postDataUser(data);
+    const res = await loginService(data);
     console.log(res);
   };
 
@@ -44,7 +45,7 @@ function UpdatePassword() {
       setPassword((last) => ({ ...last, errorPassword }));
     } else {
       sendForm();
-        <NewPasswordExit />;
+      setPassword((last) => ({ ...last, newPassword: true }));
     }
   };
 
@@ -76,6 +77,9 @@ function UpdatePassword() {
             <Button type="submit">Actualizar contraseña</Button>
           </div>
         </form>
+        {
+          password.newPassword && <NewPasswordExit />
+        }
       </div>
     </ContainerAuth>
   );
