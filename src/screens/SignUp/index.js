@@ -137,33 +137,35 @@ function Register() {
       topLink="Iniciar Sesión"
       linkTo="/login"
     >
-      <Title upperTitle={getGreeting()}>
-        Registrate
-      </Title>
-      <form
-        className="form"
-        onSubmit={handleSubmit}
-      >
-        { DATA_INPUTS.map(({ name, id, ...rest }) => (
-          <div className={styles.containerInput} key={id}>
-            <Input
-              key={id}
-              htmlFor={name}
-              value={form[name]}
-              onChange={handleChange}
-              error={errors[name]}
-              errorLink={errorsLink[name]}
-              {...rest}
-            />
+      <div className={styles.container}>
+        <Title upperTitle={getGreeting()}>
+          Registrate
+        </Title>
+        <form
+          className="form"
+          onSubmit={handleSubmit}
+        >
+          { DATA_INPUTS.map(({ name, id, ...rest }) => (
+            <div className={styles.containerInput} key={id}>
+              <Input
+                key={id}
+                htmlFor={name}
+                value={form[name]}
+                onChange={handleChange}
+                error={errors[name]}
+                errorLink={errorsLink[name]}
+                {...rest}
+              />
+            </div>
+          ))}
+          <div className={styles.containerButtonCheckbox}>
+            <Button loading={isSending} disabled={isSending} type="submit"> Registrarse </Button>
           </div>
-        ))}
-        <div className={styles.containerButtonCheckbox}>
-          <Button loading={isSending} disabled={isSending} type="submit"> Registrarse </Button>
-        </div>
-      </form>
-      <AuthFbGoogle />
+        </form>
+        <AuthFbGoogle />
+      </div>
       {
-        form.complete && <MessageExit />
+        form.complete === true && <MessageExit />
       }
     </ContainerAuth>
   );

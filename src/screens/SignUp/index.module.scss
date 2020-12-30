@@ -1,7 +1,12 @@
 .containerInput {
     padding: 20px 10px 20px 0;
 }
-  
+
+.container:first-of-type {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
 @media screen and (min-width: 768px) {
   .containerInput {
     padding: 20px 50px 20px 0;

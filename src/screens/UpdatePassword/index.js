@@ -78,7 +78,8 @@ function UpdatePassword() {
           </div>
         </form>
         {
-          password.newPassword && <NewPasswordExit />
+          password.newPassword ? 
+          <NewPasswordExit /> : <form></form>
         }
       </div>
     </ContainerAuth>
