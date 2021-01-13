@@ -23,6 +23,7 @@ function Login(props) {
   const [form, setForm] = useState({
     username: '',
     password: '',
+    rememberPass: false,
   });
 
   const [errors, setErrors] = useState({
@@ -78,6 +79,10 @@ function Login(props) {
     setIsSending(false);
   };
 
+  const handleClick = () => {
+    setForm(() => ({ rememberPass: true }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { username, password } = form;
@@ -99,6 +104,8 @@ function Login(props) {
 
     if (passwordIsValid) {
       sendForm();
+      setForm(() => ({ rememberPass: true }));
+      localStorage.setItem('username', JSON.stringify({ username, password }));
     }
   };
 
@@ -150,6 +157,7 @@ function Login(props) {
               htmlFor="rememberPass"
               type="checkbox"
               label="Recordar Contraseña"
+              onClick={handleClick}
             />
           </div>
           <Button loading={isSending} disabled={isSending} type="submit">Iniciar Sesión</Button>
