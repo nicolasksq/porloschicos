@@ -20,10 +20,12 @@ import { loginService } from '../../services/authService';
 import styles from './index.module.scss';
 
 function Login(props) {
+  const userCredentials = JSON.parse(localStorage.getItem('credentials'));
+
   const [form, setForm] = useState({
-    username: '',
-    password: '',
-    rememberPass: false,
+    username: userCredentials?.username || '',
+    password: userCredentials?.password || '',
+    rememberPass: userCredentials !== null,
   });
 
   const [errors, setErrors] = useState({
@@ -80,12 +82,12 @@ function Login(props) {
   };
 
   const handleClick = () => {
-    setForm(() => ({ rememberPass: true }));
+    setForm((lastForm) => ({ ...lastForm, rememberPass: !lastForm.rememberPass }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { username, password } = form;
+    const { username, password, rememberPass } = form;
 
     const { emailIsValid, errorEmail } = validateEmail(username);
 
@@ -103,9 +105,11 @@ function Login(props) {
     }
 
     if (passwordIsValid) {
+      if (rememberPass) {
+        localStorage.setItem('credentials', JSON.stringify({ username, password }));
+      }
+
       sendForm();
-      setForm(() => ({ rememberPass: true }));
-      localStorage.setItem('username', JSON.stringify({ username, password }));
     }
   };
 
@@ -158,6 +162,8 @@ function Login(props) {
               type="checkbox"
               label="Recordar Contraseña"
               onClick={handleClick}
+              value={form.rememberPass}
+              checked={form.rememberPass}
             />
           </div>
           <Button loading={isSending} disabled={isSending} type="submit">Iniciar Sesión</Button>

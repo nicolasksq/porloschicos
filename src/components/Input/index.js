@@ -6,6 +6,7 @@ import styles from './index.module.scss';
 
 function Input({
   label, htmlFor, type, error, iconActive, icon, onClick, onChange, value, required, errorLink,
+  checked,
 }) {
   return (
     <>
@@ -21,6 +22,7 @@ function Input({
           onChange={onChange}
           value={value}
           required={required}
+          checked={checked}
         />
         { icon
           && (
@@ -66,6 +68,7 @@ Input.propTypes = {
     linkTo: PropTypes.string,
     message: PropTypes.string,
   }),
+  checked: PropTypes.bool,
 };
 
 Input.defaultProps = {
@@ -78,6 +81,7 @@ Input.defaultProps = {
   value: '',
   required: false,
   errorLink: null,
+  checked: false,
 };
 
 export default Input;
