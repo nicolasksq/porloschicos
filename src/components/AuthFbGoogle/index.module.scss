@@ -1,0 +1,39 @@
+.containerButtons {
+  position: relative;
+  margin: 20px 0;
+  padding-top: 25px;
+  border-top: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+ 
+  & > * + * {
+    margin-top: 15px;
+  } 
+  
+  & > span {
+    margin: 0;
+    color: #7E7E80;
+    font-size: 15px;
+    background-color: #fff;
+    width: 40px;
+    text-align: center; 
+    position: absolute;
+    top: -12px;
+    left: calc(50% - 20px);
+    right: calc(50% - 20px);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .containerButtons {
+    margin: 20px 20px 20px 0;
+  }
+}
+
+.iconBtn {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  min-height: 100%;
+}

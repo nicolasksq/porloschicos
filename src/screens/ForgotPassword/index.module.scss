@@ -1,0 +1,15 @@
+.container {
+  max-width: 300px;
+  margin-top: 60px;
+
+  & div:first-of-type {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .container{
+    max-width: 390px;
+  }
+}

@@ -1,0 +1,81 @@
+.containerInput {
+  padding: 20px 10px 20px 0;
+}
+
+.link {
+  display: inline-block;
+  padding: 15px 0;
+}
+
+@media screen and (min-width: 768px) {
+  .containerInput {
+    padding: 20px 50px 20px 0;
+  }
+}
+
+.containerButtonCheckbox {
+  display: flex;
+  flex-direction: column;
+
+  & > button {
+    flex: 1;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .containerButtonCheckbox {
+    flex-direction: row;
+    align-items: center;
+    padding: 15px 25px 20px 0; 
+  }
+}
+
+.containerCheckbox {
+  align-self: flex-start;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 20px;
+  
+  & input {
+    width: 18px;
+    height: 18px;
+  }
+
+  & > label {
+    margin-left: 7px;
+    font-size: 13.5px;
+    color: #313030;
+    align-self: center;
+    transform: translateY(2.5px);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .containerCheckbox {
+    align-self: center;
+    margin-bottom: 0;
+  }
+}
+
+.containerButtons {
+  margin: 20px 0;
+  padding-top: 25px;
+  border-top: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+ 
+  & > * + * {
+    margin-top: 15px;
+  } 
+}
+
+@media screen and (min-width: 768px) {
+  .containerButtons {
+    margin: 20px 20px 20px 0;
+  }
+}
+
+.loader {
+  display: none;
+}
