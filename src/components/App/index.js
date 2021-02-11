@@ -5,6 +5,7 @@ import { AuthProvider } from 'context/AuthContext';
 
 import SignUp from 'screens/SignUp';
 import Login from 'screens/Login';
+import Dashboard from 'screens/Dashboard';
 // import UpdatePassword from 'screens/UpdatePassword';
 import ForgotPassword from 'screens/ForgotPassword';
 import PrivateTest from 'screens/PrivateTest';
@@ -16,6 +17,8 @@ function App() {
     <Switch>
       <Route exact path="/forgot-password" component={ForgotPassword} />
       <Route exact path="/sign-up" component={SignUp} />
+      <Route exact path="/dashboard" component={Dashboard} />
+
       <AuthProvider>
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/private" component={PrivateTest} hasPermissions redirectTo="/login" />
