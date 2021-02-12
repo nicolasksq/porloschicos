@@ -6,29 +6,24 @@
     width: 185px;
     margin: 20px;
 }
+.admin{
+    text-align: end;
+    position: absolute;
+    top: 0;
+    right: 8%;
+}
 .icono{
     margin: 5px;
 }
-.containerSide {
-    background-color: #1E2933;
-    height: 100vh;
-    color: white;
-    font-size: 1.1em;
+.search {
+    border: 1px;
+    position: absolute;
+    top: 20%;
+    left: 21%;
+    display: flex;
 }
 
-.menu {
-    background-color: transparent;
-    color: white;
-    border: none;
-    font-size: 1em;
-}
-
-.linkMenu {
-    display: none;
-    list-style-type: none;
-}
-
-.link {
-    color:white;
-    font-size: 0.9em;
+.button {
+    position: relative;
+    left: 87%;
 }
