@@ -11,17 +11,33 @@ import iconPadrino from '../../assets/padrino.svg';
 import styles from './index.module.scss';
 
 function Dashboard() {
+  const handleClickMenu1 = () => {
+    const activate = document.getElementById('menu-1');
+    if (activate.style.display === 'none') {
+      activate.style.display = 'block';
+    } else {
+      activate.style.display = 'none';
+    }
+  };
+  const handleClickMenu2 = () => {
+    const activate = document.getElementById('menu-2');
+    if (activate.style.display === 'none') {
+      activate.style.display = 'block';
+    } else {
+      activate.style.display = 'none';
+    }
+  };
   return (
     <div className={styles.container}>
       <img className={styles.logo} src={logo} alt="logo-por-los-chicos" />
       <div className={styles.containerSide}>
         <p>Dashboard</p>
         <div>
-          <button className={styles.menu} type="button">
+          <button onClick={handleClickMenu1} className={styles.menu} type="button">
             Contenido
             <img className={styles.icono} src={iconMenu} alt="menu" />
           </button>
-          <ul className={styles.linkMenu}>
+          <ul id="menu-1" className={styles.linkMenu}>
             <li>
               <Link className={styles.link} to="3">
                 <img className={styles.icono} src={iconProject} alt="icono-proyecto" />
@@ -43,11 +59,11 @@ function Dashboard() {
           </ul>
         </div>
         <div>
-          <button className={styles.menu} type="button">
+          <button onClick={handleClickMenu2} className={styles.menu} type="button">
             Roles y permisos
             <img className={styles.icono} src={iconMenu} alt="menu" />
           </button>
-          <ul className={styles.linkMenu}>
+          <ul id="menu-2" className={styles.linkMenu}>
             <li>
               <Link className={styles.link} to="3">
                 <img className={styles.icono} src={iconPadrino} alt="padrino" />
