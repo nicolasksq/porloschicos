@@ -8,6 +8,7 @@ import iconUsers from '../../assets/single-neutral-circle.svg';
 import iconLogOut from '../../assets/logout-1.svg';
 import iconMenu from '../../assets/menu.svg';
 import iconPadrino from '../../assets/padrino.svg';
+import iconDashboard from '../../assets/layout-dashboard.svg';
 import styles from './index.module.scss';
 
 function Dashboard() {
@@ -31,7 +32,10 @@ function Dashboard() {
     <div className={styles.container}>
       <img className={styles.logo} src={logo} alt="logo-por-los-chicos" />
       <div className={styles.containerSide}>
-        <p>Dashboard</p>
+        <p>
+          <img className={styles.icono} src={iconDashboard} alt="icon-dashboard" />
+          Dashboard
+        </p>
         <div>
           <button onClick={handleClickMenu1} className={styles.menu} type="button">
             Contenido
